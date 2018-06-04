@@ -54,17 +54,21 @@ function createWindow() {
 
   splashWindow.loadURL(
     url.format({
-      pathname: path.join(__dirname, isDev ? '../../splash.html' : '../../build/splash.html'),
+      pathname: path.join(__dirname, 'splash.html'),
       protocol: 'file:',
       slashes: true
     })
   );
 
-  mainWindow.loadURL(process.env.ELECTRON_START_URL || url.format({
-    pathname: path.join(__dirname, isDev ? '../../index.html' : '../../build/index.html'),
-    protocol: 'file:',
-    slashes: true
-  }));
+  mainWindow.loadURL(
+    isDev ?
+      `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}` :
+      url.format({
+        pathname: path.join(__dirname, 'index.html'),
+        protocol: 'file:',
+        slashes: true
+      })
+  );
 
   // When mainWindow finishes loading, then show
   // the mainWindow and destroy the splashWindow.
