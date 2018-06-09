@@ -23,15 +23,15 @@ async function resolve(url) {
   if (isNOS(host)) {
     const filename = pathname === '/' ? 'welcome.html' : pathname;
 
-    if (process.env.ELECTRON_START_URL) {
-      return resolveURL(process.env.ELECTRON_START_URL, filename);
-    } else {
-      return formatURL({
-        pathname: path.join(__dirname, filename),
-        protocol: 'file:',
-        slashes: true
-      });
-    }
+    // if (process.env.ELECTRON_START_URL) {
+    //   return resolveURL(process.env.ELECTRON_START_URL, filename);
+    // } else {
+    return formatURL({
+      pathname: path.join(__dirname, filename),
+      protocol: 'file:',
+      slashes: true
+    });
+    // }
   }
 
   if (isLocal(host)) {
