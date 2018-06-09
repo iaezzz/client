@@ -40,9 +40,7 @@ function createWindow() {
     Object.assign({ width: 1250, height: 700, show: false, icon: iconPath }, framelessConfig)
   );
 
-  if (isDev) {
-    mainWindow.webContents.openDevTools();
-  }
+  mainWindow.webContents.openDevTools();
 
   // splashWindow is shown while mainWindow is loading hidden
   // As it is light weight it will load almost instantly and before mainWindow

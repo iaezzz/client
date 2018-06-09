@@ -23,6 +23,7 @@ function registerNosProtocol() {
       const resolvedUrl = url.parse(await resolve(url.parse(req.url)));
 
       if (resolvedUrl.protocol === 'file:') {
+        console.log('attempting to load via file protocol:', resolvedUrl);
         const contentType = mime.contentType(path.extname(resolvedUrl.path));
 
         callback({
@@ -31,6 +32,7 @@ function registerNosProtocol() {
           data: createReadStream(resolvedUrl.path)
         });
       } else {
+        console.log('attempting to load via http protocol:', resolvedUrl);
         /**
          * TODO: The `request` package allows us to treat `request.get` as a stream.  Unfortunately,
          * the result is treated as content-type "text/plain".  If that can be solved, the solution
@@ -49,7 +51,7 @@ function registerNosProtocol() {
         });
       }
     } catch (error) {
-      // console.error(error);
+      console.error(`error loading ${req.url}:`, error);
       callback({ error });
     }
   });

@@ -112,8 +112,9 @@ export default class DAppContainer extends React.Component {
     this.props.setTabTarget(this.props.sessionId, event.url, { leavingPage: false });
   }
 
-  handleNavigateFailed = (_event) => {
+  handleNavigateFailed = (event) => {
     // TODO: Display an error page or something.  For now, just clear out the loading spinner.
+    console.error('FAILED TO LOAD!', event.errorCode, event.errorDescription, event.validatedURL);
     this.props.setTabLoaded(this.props.sessionId, true);
   }
 
